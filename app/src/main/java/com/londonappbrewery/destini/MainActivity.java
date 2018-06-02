@@ -1,10 +1,12 @@
 package com.londonappbrewery.destini;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,10 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private stories[] mStories = new stories[]{
             new stories(R.string.T1_Story,R.string.T1_Ans1,R.string.T1_Ans2),
             new stories(R.string.T2_Story,R.string.T2_Ans1,R.string.T2_Ans2),
-            new stories(R.string.T3_Story,R.string.T3_Ans1,R.string.T3_Ans2),
-            new stories(R.string.T4_End,R.string.T1_Ans1,R.string.T1_Ans2),
-            new stories(R.string.T5_End,R.string.T1_Ans1,R.string.T1_Ans2),
-            new stories(R.string.T6_End,R.string.T1_Ans1,R.string.T1_Ans2)
+            new stories(R.string.T3_Story,R.string.T3_Ans1,R.string.T3_Ans2)
     };
 
     @Override
@@ -69,22 +68,36 @@ public class MainActivity extends AppCompatActivity {
             StoryIndex = 2;
         }
         else if(storyIndex == 1 && choice == 2){
-            StoryIndex = 3;
-            mButtonTop.setVisibility(View.GONE);
-            mButtonBottom.setVisibility(View.GONE);
+            end(4);
+            return;
         }
-        else if(storyIndex == 2 && choice == 1){
-            StoryIndex = 5;
-            mButtonTop.setVisibility(View.GONE);
-            mButtonBottom.setVisibility(View.GONE);
+        else if(storyIndex == 2 && choice == 1) {
+            end(6);
+            return;
         }
         else if(storyIndex == 2 && choice == 2){
-            StoryIndex = 4;
-            mButtonTop.setVisibility(View.GONE);
-            mButtonBottom.setVisibility(View.GONE);
+            end(5);
+            return;
         }
         mStory.setText(mStories[StoryIndex].getmStory());
         mButtonTop.setText(mStories[StoryIndex].getmAns1());
         mButtonBottom.setText(mStories[StoryIndex].getmAns2());
+    }
+
+    public void end(int endNum){
+        if(endNum == 4){
+            mStory.setText(R.string.T4_End);
+            Toast.makeText(this,"Whoa!!!",Toast.LENGTH_SHORT).show();
+        }
+        else if(endNum == 5){
+            mStory.setText(R.string.T5_End);
+            Toast.makeText(this,"Nice!!!",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            mStory.setText(R.string.T6_End);
+            Toast.makeText(this,"Damn!!!",Toast.LENGTH_SHORT).show();
+        }
+        mButtonTop.setVisibility(View.GONE);
+        mButtonBottom.setVisibility(View.GONE);
     }
 }
